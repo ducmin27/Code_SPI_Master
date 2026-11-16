@@ -38,9 +38,7 @@ module tb_spi_master;
         forever #(CLK_PERIOD / 2) clk = ~clk;
     end
 
-    // ---------------------------------------------------------
     // Task hỗ trợ: Thực hiện truyền/nhận Full-Duplex và kiểm tra
-    // ---------------------------------------------------------
     task automatic run_spi_transaction(
         input logic [7:0] master_tx,
         input logic [7:0] expected_rx,
@@ -90,9 +88,7 @@ module tb_spi_master;
         #(CLK_PERIOD * 5);
     endtask
 
-    // ---------------------------------------------------------
     // Kịch bản kiểm thử chính
-    // ---------------------------------------------------------
     initial begin
         // Khởi tạo trạng thái ban đầu
         rst_n       = 1'b0;
@@ -105,9 +101,7 @@ module tb_spi_master;
         rst_n = 1'b1;
         #(CLK_PERIOD * 2);
 
-        $display("==================================================");
-        $display("   BAT DAU MO PHONG SYSTEMVERILOG SPI MASTER      ");
-        $display("==================================================");
+        $display("   BAT DAU MO PHONG SYSTEMVERILOG SPI MASTER:      ");
 
         // Test 1: Chế độ Loopback (Gửi 0xA5, nhận về đúng 0xA5)
         $display("\n--- Test 1: Loopback Mode ---");
@@ -122,9 +116,7 @@ module tb_spi_master;
         run_spi_transaction(8'hFF, 8'h00, 1'b0);
         run_spi_transaction(8'h00, 8'hFF, 1'b0);
 
-        $display("\n==================================================");
-        $display("   HOAN TAT MO PHONG                              ");
-        $display("==================================================");
+        $display("   HOAN TAT MO PHONG.                              ");
         $finish;
     end
 

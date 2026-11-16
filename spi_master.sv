@@ -36,9 +36,7 @@ module spi_master #(
     // Đẩy bit MSB ra MOSI ngay khi CS_N kéo xuống 0 (đáp ứng CPHA = 0)
     assign mosi = (~cs_n) ? tx_shift_reg[7] : 1'b0;
 
-    // ---------------------------------------------------------
     // 1. Khối mạch tuần tự (Sequential Logic) dùng always_ff
-    // ---------------------------------------------------------
     always_ff @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             state        <= IDLE;
@@ -107,9 +105,7 @@ module spi_master #(
         end
     end
 
-    // ---------------------------------------------------------
     // 2. Khối mạch tổ hợp (Combinational Logic) dùng always_comb
-    // ---------------------------------------------------------
     always_comb begin
         next_state = state; // Mặc định giữ nguyên trạng thái để tránh tạo Latch
 
